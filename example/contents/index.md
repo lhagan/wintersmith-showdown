@@ -55,6 +55,7 @@ Inline code `import urllib2` using backticks.
 Fenced code with optional language identifier (extra):
 
 ```javascript
+// example
 math = {
   root: Math.sqrt,
   square: square,

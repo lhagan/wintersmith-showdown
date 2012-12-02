@@ -10,10 +10,10 @@ pre code {
   background: #fff; color: black;
 }
 */
-pre .comment,
+pre .cs,
 pre .template_comment,
 pre .javadoc,
-pre .comment * {
+pre .cs * {
   color: rgb(0,106,0);
 }
 
@@ -146,7 +146,7 @@ pre .deletion {
   background-color: #FFC8BD;
 }
 
-pre .comment .yardoctag {
+pre .cs .yardoctag {
   font-weight: bold;
 }
 
