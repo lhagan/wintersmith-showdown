@@ -1,6 +1,8 @@
 # wintersmith-showdown
 
-[Showdown](https://github.com/lhagan/showdown) plugin for [wintersmith](https://github.com/jnordberg/wintersmith). Renders Markdown content using (a modified version of) Showdown instead of the default, [marked](https://github.com/chjj/marked). While slower to render, this enables lots of Markdown extras such as footnotes, tables, strikethrough, LaTeX math (via [MathML](http://www.mathjax.com)), and smart punctuation. This plugin also adds extremely inefficient code highlighting via `highlight.js`.
+[Showdown](https://github.com/lhagan/showdown) plugin for [wintersmith](https://github.com/jnordberg/wintersmith). Renders Markdown content using (a modified version of) Showdown instead of the default, [marked](https://github.com/chjj/marked). While slower to render, this enables lots of Markdown extras such as footnotes, tables, strikethrough, LaTeX math (via [MathML](http://www.mathjax.com)), and smart punctuation. Also adds extremely inefficient code highlighting via `highlight.js`.
+
+This is a very rough, initial release. Use at your own risk! 
 
 ### install:
 
