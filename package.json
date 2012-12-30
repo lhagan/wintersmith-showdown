@@ -7,8 +7,8 @@
   "dependencies": {
     "showdown": "git://github.com/lhagan/showdown.git#showdown-extended",
     "highlight.js": ">=7.3.0",
-    "jsdom": ">=0.2.19",
-    "async": ">= 0.1.x",
+    "cheerio": ">=0.10.x",
+    "async": ">=0.1.x",
     "coffee-script": "1.2.x"
   }
 }
