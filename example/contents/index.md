@@ -1,6 +1,7 @@
+---
 title: Wintersmith Showdown
 template: index.jade
-
+---
 
 Headers
 -------

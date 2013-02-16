@@ -7,38 +7,6 @@ url = require 'url'
 hljs = require 'highlight.js'
 cheerio = require 'cheerio'
 
-parseMetadata = (metadata, callback) ->
-  ### takes *metadata* in the format:
-      key: value
-      foo: bar
-      returns parsed object ###
-
-  rv = {}
-  try
-    lines = metadata.split '\n'
-
-    for line in lines
-      pos = line.indexOf ':'
-      key = line.slice(0, pos).toLowerCase()
-      value = line.slice(pos + 1).trim()
-      rv[key] = value
-
-    callback null, rv
-
-  catch error
-    callback error
-
-extractMetadata = (content, callback) ->
-  # split metadata and markdown content
-  split_idx = content.indexOf '\n\n' # should probably make this a bit more robust
-
-  async.parallel
-    metadata: (callback) ->
-      parseMetadata content.slice(0, split_idx), callback
-    markdown: (callback) ->
-      callback null, content.slice(split_idx + 2)
-  , callback
-
 showdownRender = (page, callback) ->
   # convert the page
   page._htmlraw = converter.makeHtml(page._content)
@@ -120,7 +88,7 @@ module.exports = (wintersmith, callback) ->
       (callback) ->
         fs.readFile path.join(base, filename), callback
       (buffer, callback) ->
-        extractMetadata buffer.toString(), callback
+        wintersmith.defaultPlugins.MarkdownPage.extractMetadata buffer.toString(), callback
       (result, callback) =>
         {markdown, metadata} = result
         page = new this filename, markdown, metadata
