@@ -9,11 +9,11 @@ cheerio = require 'cheerio'
 
 showdownRender = (page, callback) ->
   # convert the page
-  page._htmlraw = converter.makeHtml(page._content)
+  page._htmlraw = converter.makeHtml(page.markdown)
   
   # apply highlight.js,
   # don't run if text is empty
-  if page._htmlraw.length 
+  if page._htmlraw.length
     $ = cheerio.load page._htmlraw
     
     blocks = $("pre code")
@@ -42,11 +42,11 @@ showdownRender = (page, callback) ->
   else
     callback null, page
 
-module.exports = (wintersmith, callback) ->
+module.exports = (env, callback) ->
 
-  class ShowdownPage extends wintersmith.defaultPlugins.MarkdownPage
+  class ShowdownPage extends env.plugins.MarkdownPage
     
-    getHtml: (base) ->
+    getHtml: (base=env.config.baseUrl) ->      
       # TODO: cleaner way to achieve this?
       # http://stackoverflow.com/a/4890350
       name = @getFilename()
@@ -62,7 +62,7 @@ module.exports = (wintersmith, callback) ->
         @_html = @_html.replace(/(<(a|img)[^>]+(href|src)=")\/([^"]+)/g, '$1' + base + '/$4')
       return @_html
     
-    getIntro: (base) ->
+    getIntro: (base=env.config.baseUrl) ->
       @_html = @getHtml(base)
       idx = ~@_html.indexOf('<span class="more') or ~@_html.indexOf('<h2') or ~@_html.indexOf('<hr')
       # TODO: simplify!
@@ -83,15 +83,15 @@ module.exports = (wintersmith, callback) ->
       @_hasMore ?= (@_html.length > @_intro.length)
       return @_hasMore
   
-  ShowdownPage.fromFile = (filename, base, callback) ->
+  ShowdownPage.fromFile = (filepath, callback) ->
     async.waterfall [
       (callback) ->
-        fs.readFile path.join(base, filename), callback
+        fs.readFile filepath.full, callback
       (buffer, callback) ->
-        wintersmith.defaultPlugins.MarkdownPage.extractMetadata buffer.toString(), callback
+        ShowdownPage.extractMetadata buffer.toString(), callback
       (result, callback) =>
         {markdown, metadata} = result
-        page = new this filename, markdown, metadata
+        page = new this filepath, metadata, markdown
         callback null, page
       (page, callback) =>
         showdownRender page, callback
@@ -99,6 +99,6 @@ module.exports = (wintersmith, callback) ->
         callback null, page
     ], callback
    
-  wintersmith.registerContentPlugin 'pages', '**/*.*(markdown|mkd|md)', ShowdownPage
+  env.registerContentPlugin 'pages', '**/*.*(markdown|mkd|md)', ShowdownPage
 
   callback()
