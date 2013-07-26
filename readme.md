@@ -6,7 +6,7 @@ This is a very rough, initial release. Use at your own risk!
 
 ### install:
 
-    npm install git@github.com:lhagan/wintersmith-showdown.git
+    npm install git://github.com/lhagan/wintersmith-showdown.git
   
 then add `./node_modules/wintersmith-showdown/` to `config.json` like this:
 
