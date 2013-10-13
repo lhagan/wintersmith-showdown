@@ -1,6 +1,5 @@
 async = require 'async'
 Showdown = require 'showdown'
-converter = new Showdown.converter(extensions: ['github', 'table', 'math', 'smartypants', 'footnotes'])
 fs = require 'fs'
 path = require 'path'
 url = require 'url'
@@ -9,6 +8,8 @@ cheerio = require 'cheerio'
 
 showdownRender = (page, callback) ->
   # convert the page
+  extensions = page.metadata.showdownExtensions or ['github', 'table', 'math', 'smartypants', 'footnotes']
+  converter = new Showdown.converter(extensions: extensions)
   page._htmlraw = converter.makeHtml(page.markdown)
   
   # apply highlight.js,
