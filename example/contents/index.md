@@ -1,6 +1,7 @@
 ---
 title: Wintersmith Showdown
 template: index.jade
+showdownExtensions: ['github', 'table', 'math', 'smartypants', 'footnotes']
 ---
 
 Headers
@@ -69,7 +70,7 @@ math = {
 
 Images
 ------
-![with optional caption](http://jnordberg.github.com/wintersmith/img/wintersmith.svg "Wintersmith logo")
+![with optional caption](http://wintersmith.io/images/wintersmith.svg "Wintersmith logo")
 
 A ![resize icon][resize_icon] reference style image with alt text.
 

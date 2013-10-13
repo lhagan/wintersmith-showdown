@@ -22,3 +22,13 @@ then add `./node_modules/wintersmith-showdown/` to `config.json` like this:
         "./node_modules/wintersmith-showdown/"
       ]
     }
+
+### per-page showdown extensions
+
+By default, all extensions are enabled. For more fine-grained control, include `showdownExtensions` in your page metadata. For example:
+
+    ---
+    title: Wintersmith Showdown
+    template: index.jade
+    showdownExtensions: ['github', 'smartypants']
+    ---
