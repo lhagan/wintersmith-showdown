@@ -110,6 +110,12 @@ Showdown Tables:
 | Plain   | Other _value_                                      |
 
 
+Another Table:
+
+| Col 3   | Col 4                                              |
+|======== |====================================================|
+| data 1  | data 2                                             |
+
 Cross-References (showdown-extended)
 -------------------------
 
